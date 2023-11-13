@@ -1,7 +1,9 @@
 package com.mark.valkanouski.interview.schedular.controller;
 
+import com.mark.valkanouski.interview.schedular.dto.ResponseDto;
 import com.mark.valkanouski.interview.schedular.dto.UserDto;
 import com.mark.valkanouski.interview.schedular.service.UserService;
+import com.mark.valkanouski.interview.schedular.util.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -24,14 +26,14 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public HttpEntity<UserDto> getUser(@PathVariable Long id) {
+    public HttpEntity<ResponseDto<Object>> getUser(@PathVariable Long id) {
         UserDto userDto = userService.getUser(id);
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
+        return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDto), HttpStatus.OK);
     }
 
     @PostMapping
-    public HttpEntity<UserDto> createUser(@RequestBody UserDto userDto) {
+    public HttpEntity<ResponseDto<Object>> createUser(@RequestBody UserDto userDto) {
         userDto = userService.createUser(userDto);
-        return new ResponseEntity<>(userDto, HttpStatus.OK);
+        return new ResponseEntity<>(ResponseUtil.getSuccessResponse(userDto), HttpStatus.OK);
     }
 }

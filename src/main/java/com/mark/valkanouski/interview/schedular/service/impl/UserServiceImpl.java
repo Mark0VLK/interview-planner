@@ -7,6 +7,7 @@ import com.mark.valkanouski.interview.schedular.mapper.UserMapper;
 import com.mark.valkanouski.interview.schedular.repository.UserRepository;
 import com.mark.valkanouski.interview.schedular.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUser(Long id) {
         Optional<User> optionalUser = userRepository.findById(id);
-        User user = optionalUser.orElseThrow(() -> new ResourceNotFoundException("Resource not found", "404"));
+        User user = optionalUser.orElseThrow(() -> new ResourceNotFoundException("Resource not found", HttpStatus.NOT_FOUND));
         return userMapper.mapToUserDto(user);
     }
 }
