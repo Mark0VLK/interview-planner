@@ -24,17 +24,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto createUser(UserDto userDto) {
-        User user = userMapper.mapToUser(userDto);
-        User userEntity = userRepository.save(user);
-        userDto = userMapper.mapToUserDto(userEntity);
-        return userDto;
+    public UserDto getUser(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        User user = optionalUser.orElseThrow(() -> new ResourceNotFoundException("User not found", HttpStatus.NOT_FOUND));
+        return userMapper.mapToUserDto(user);
     }
 
     @Override
-    public UserDto getUser(Long id) {
-        Optional<User> optionalUser = userRepository.findById(id);
-        User user = optionalUser.orElseThrow(() -> new ResourceNotFoundException("Resource not found", HttpStatus.NOT_FOUND));
-        return userMapper.mapToUserDto(user);
+    public UserDto createUser(UserDto userDto) {
+        User user = userMapper.mapToUser(userDto);
+        user = userRepository.save(user);
+        userDto = userMapper.mapToUserDto(user);
+        return userDto;
     }
 }

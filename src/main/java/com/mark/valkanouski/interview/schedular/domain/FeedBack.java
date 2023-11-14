@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="feedback")
+@Table(name = "feedback")
 @Data
 public class FeedBack {
     @Id

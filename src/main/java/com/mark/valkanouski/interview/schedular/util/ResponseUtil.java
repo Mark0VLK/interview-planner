@@ -16,8 +16,8 @@ public class ResponseUtil {
         return response;
     }
 
-    public static ResponseDto<?> getFailureResponse(String message) {
-        ResponseDto<?> response = new ResponseDto<>();
+    public static ResponseDto<Object> getFailureResponse(String message) {
+        ResponseDto<Object> response = new ResponseDto<>();
         response.setMessage(message);
         response.setStatusCode(ApiStatus.FAILURE.getValue());
         return response;
